@@ -1509,7 +1509,7 @@ def compute_error_backoff(
     _retry_after = provider_retry_after_seconds(api_error)
     if _retry_after is not None:
         _retry_after = min(_retry_after, RETRY_AFTER_CAP_S)
-    wait_time = _retry_after if _retry_after is not None else jittered_backoff(retry_count, base_delay=2.0, max_delay=60.0)
+    wait_time = _retry_after if _retry_after is not None else jittered_backoff(retry_count, base_delay=0.5, max_delay=5.0)
     _backoff_policy = None
     _adaptive = is_rate_limited or is_zai_coding_overload
     if _adaptive and _retry_after is None:

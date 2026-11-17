@@ -1310,6 +1310,20 @@ def _reasoning_config_for_wire(agent):
         # route's own, recorded below as what went out so a rejection of it lands in the branch above.
         from agent.reasoning_params import unset_reasoning_default
         cfg = unset_reasoning_default(agent)
+    try:
+        from agent.models_dev import get_model_capabilities
+        caps = get_model_capabilities(
+            getattr(agent, "provider", "") or "",
+            getattr(agent, "model", "") or "",
+            allow_network=False,
+        )
+    except Exception:
+        caps = None
+    if caps is not None and caps.supports_reasoning is False:
+        # Catalog/model_overrides marks this route non-reasoning: it rejects every reasoning
+        # field, including a disable, so omit the fields entirely.
+        agent._wire_reasoning_config = None
+        return None
     if getattr(agent, "_reasoning_disable_rejected", False):
         # The route rejects disables. Resend exactly what the session has
         # been sending — the user's own config — so the retry lands on the

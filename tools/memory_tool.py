@@ -393,7 +393,9 @@ MEMORY_SCHEMA = {
         "notes (environment, conventions, tool quirks, lessons).\n\n"
         "SKIP: trivial/obvious info, easily re-discovered facts, raw data dumps, task progress, "
         "completed-work logs, temporary TODO state (use session_search for those). Reusable "
-        "procedures belong in a skill, not memory."
+        "procedures belong in a skill, not memory. NEVER save API keys, tokens, passwords, "
+        "secrets, credentials, or connection strings 鈥?if encountered, record only that they "
+        "exist, redacted as [REDACTED]."
     ),
     # Each field is advertised once, inside operations[]. The handler still ACCEPTS the
     # top-level single-op shape (action/content/old_text) and the new_text alias: models

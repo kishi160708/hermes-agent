@@ -20,10 +20,10 @@ from agent.error_classifier import TRANSIENT_REASONS
 
 logger = logging.getLogger("agent.conversation_loop")
 
-_LADDER_BASE_DELAY_S = 15.0
-_LADDER_CAP_S = 60.0
+_LADDER_BASE_DELAY_S = 2.0
+_LADDER_CAP_S = 10.0
 # A provider that names its own cooldown knows better than the schedule, within reason.
-_RETRY_AFTER_CAP_S = 120.0
+_RETRY_AFTER_CAP_S = 15.0
 
 # How the user stops the wait on this surface; the ladder text must say so plainly.
 _STOP_HINTS = {
